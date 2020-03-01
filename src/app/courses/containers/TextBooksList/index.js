@@ -5,7 +5,7 @@ import TextBook from 'app/courses/components/TextBook';
 import { updateTextbook, discardTextbookChanges } from 'app/store/data/course/course.actions';
 import { areEqual } from 'app/core/utils/areEqual';
 
-export function TextBooksList({ textbooks, canShow, updateTextbook, discardTextbookChanges }) {
+export function TextBooksList({ textbooks, canShow, updateTextbook, discardTextbookChanges, updatingCourse }) {
   if (!canShow) {
     return null;
   }
@@ -18,7 +18,7 @@ export function TextBooksList({ textbooks, canShow, updateTextbook, discardTextb
           handleSubmit={() => {}}
           handleReset={() => {discardTextbookChanges(id)}}
           values={currentValue}
-          enableActions={!areEqual(previousValue, currentValue)}
+          enableActions={!areEqual(previousValue, currentValue) && !updatingCourse}
         />
       )}
     </>
@@ -38,12 +38,14 @@ TextBooksList.propTypes = {
   canShow: PropTypes.bool,
   updateTextbook: PropTypes.func,
   discardTextbookChanges: PropTypes.func,
+  updatingCourse: PropTypes.bool,
 };
 
 const mapStateToProps = ({ data }) => {
   return {
     textbooks: (data.courseDetails.loaded && data.courseDetails.textbooks) || [],
     canShow: data.courseDetails.loaded,
+    updatingCourse: data.courseDetails.updating,
   };
 };
 

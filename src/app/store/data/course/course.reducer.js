@@ -6,6 +6,9 @@ import {
   UPDATE_TEXTBOOK,
   DISCARD_ALL_CHANGES,
   DISCARD_TEXTBOOK_CHANGES,
+  SAVE_ALL_CHANGES,
+  SAVE_ALL_CHANGES_SUCCESS,
+  SAVE_ALL_CHANGES_FAILED,
 } from './course.actions';
 
 const initialState = {
@@ -152,6 +155,44 @@ export function courseReducer(state = initialState, action) {
       return {
         ...state,
         textbooks: newTextbooks,
+      };
+    }
+
+    case SAVE_ALL_CHANGES: {
+      return {
+        ...state,
+        updating: true,
+        updatingError: null,
+      };
+    }
+
+    case SAVE_ALL_CHANGES_SUCCESS: {
+      const newTextbooks = state.textbooks.map((textbook) => {
+        return {
+          ...textbook,
+          previousValue: {
+            ...textbook.currentValue,
+          },
+        };
+      });
+      return {
+        ...state,
+        updating: false,
+        course: {
+          ...state.course,
+          previousValue: {
+            ...state.course.currentValue,
+          },
+        },
+        textbooks: newTextbooks,
+      };
+    }
+
+    case SAVE_ALL_CHANGES_FAILED: {
+      return {
+        ...state,
+        updating: false,
+        updatingError: action.payload.error,
       };
     }
 

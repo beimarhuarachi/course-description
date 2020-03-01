@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 const mockCourse = {
   "id": "123",
@@ -28,4 +28,16 @@ export function getCourseById(courseId = '') {
     ...mockCourse,
     id: courseId,
   });
+}
+
+/**
+ * Make a PUT reques to the server.
+ * @param {String} courseId 
+ * @param {Object} course 
+ */
+export function updateCourse(courseId = '', course) {
+  if (!course) {
+    return throwError('No body specified');
+  }
+  return of({ updated: true, id: courseId });
 }

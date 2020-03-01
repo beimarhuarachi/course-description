@@ -7,6 +7,10 @@ export const UPDATE_TEXTBOOK = 'UPDATE_TEXTBOOK';
 export const DISCARD_ALL_CHANGES = 'DISCARD_ALL_CHANGES';
 export const DISCARD_TEXTBOOK_CHANGES = 'DISCARD_TEXTBOOK_CHANGES';
 
+export const SAVE_ALL_CHANGES = 'SAVE_ALL_CHANGES';
+export const SAVE_ALL_CHANGES_SUCCESS = 'SAVE_ALL_CHANGES_SUCCESS';
+export const SAVE_ALL_CHANGES_FAILED = 'SAVE_ALL_CHANGES_FAILED';
+
 export function getCourse(courseId = '') {
   return {
     type: GET_COURSE,
@@ -67,6 +71,29 @@ export function discardTextbookChanges(textbookId = '') {
     type: DISCARD_TEXTBOOK_CHANGES,
     payload: {
       textbookId,
+    },
+  };
+}
+
+export function saveAllChanges() {
+  return {
+    type: SAVE_ALL_CHANGES,
+    payload: {},
+  };
+}
+
+export function saveAllChangesSuccess() {
+  return {
+    type: SAVE_ALL_CHANGES_SUCCESS,
+    payload: {},
+  };
+}
+
+export function saveAllChangesFailed(error) {
+  return {
+    type: SAVE_ALL_CHANGES_FAILED,
+    payload: {
+      error,
     },
   };
 }

@@ -4,6 +4,7 @@ import {
   GET_COURSE_FAILED,
   UPDATE_COURSE,
   UPDATE_TEXTBOOK,
+  DISCARD_ALL_CHANGES,
 } from './course.actions';
 
 const initialState = {
@@ -105,6 +106,27 @@ export function courseReducer(state = initialState, action) {
       });
       return {
         ...state,
+        textbooks: newTextbooks,
+      };
+    }
+
+    case DISCARD_ALL_CHANGES: {
+      const newTextbooks = state.textbooks.map((textbook) => {
+        return {
+          ...textbook,
+          currentValue: {
+            ...textbook.previousValue,
+          },
+        };
+      });
+      return {
+        ...state,
+        course: {
+          ...state.course,
+          currentValue: {
+            ...state.course.previousValue,
+          },
+        },
         textbooks: newTextbooks,
       };
     }

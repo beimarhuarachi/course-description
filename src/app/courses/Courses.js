@@ -6,6 +6,7 @@ import Header from 'app/core/components/PageHeader';
 import CourseDescription from './containers/CourseDescription';
 import TextbooksDivider from './components/TextbooksDivider';
 import TextBooksList from './containers/TextBooksList';
+import HeaderActions from './containers/HeaderActions';
 
 export function Courses({ match, getCourse }) {
   useEffect(() => {
@@ -17,7 +18,9 @@ export function Courses({ match, getCourse }) {
 
   return (
     <>
-      <Header titleKey='common.edit-course' />
+      <Header titleKey='common.edit-course'>
+        <HeaderActions />
+      </Header>
       <CourseDescription />
       <TextbooksDivider />
       <TextBooksList />

@@ -1,8 +1,11 @@
 import React from 'react';
+import { Header } from 'semantic-ui-react';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t } = useTranslation();
   return (
-    <h1>Course app</h1>
+    <Header>{t('app-name')}</Header>
   );
 }
 

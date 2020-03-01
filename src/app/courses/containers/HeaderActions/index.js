@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { areEqual } from 'app/core/utils/areEqual';
 import { Button } from 'semantic-ui-react';
-import { discardAllChanges } from 'app/store/data/course/course.actions';
+import { discardAllChanges, saveAllChanges } from 'app/store/data/course/course.actions';
 
-export function HeaderActions({ enableActions, discardAllChanges }) {
+export function HeaderActions({ enableActions, discardAllChanges, saveAllChanges }) {
   const { t } = useTranslation();
   return (
     <Button.Group>
-      <Button disabled={!enableActions} positive>{t('action.save-all')}</Button>
+      <Button disabled={!enableActions} positive onClick={saveAllChanges}>{t('action.save-all')}</Button>
       <Button.Or />
       <Button disabled={!enableActions} onClick={discardAllChanges}>
         {t('action.discard-all')}
@@ -22,14 +22,15 @@ export function HeaderActions({ enableActions, discardAllChanges }) {
 HeaderActions.propTypes = {
   enableActions: PropTypes.bool,
   discardAllChanges: PropTypes.func,
+  saveAllChanges: PropTypes.func,
 };
 
 HeaderActions.defaultProps = {
   enableActions: false,
 };
 
-function canEnableActions({ loaded, error, course, textbooks }) {
-  if (!loaded || error || !course || !textbooks) {
+function canEnableActions({ loaded, error, course, textbooks, updating }) {
+  if (!loaded || error || !course || !textbooks || updating) {
     return false;
   }
 
@@ -43,13 +44,13 @@ function canEnableActions({ loaded, error, course, textbooks }) {
   return false;
 }
 
-const mapStateToProps = ({ data }) => {
+const mapStateToProps = ({ data: { courseDetails } }) => {
   return {
-    enableActions: canEnableActions(data.courseDetails),
+    enableActions: canEnableActions(courseDetails),
   };
 };
 
 export default connect(
   mapStateToProps,
-  { discardAllChanges },
+  { discardAllChanges, saveAllChanges },
 )(HeaderActions);

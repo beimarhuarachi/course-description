@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Icon, Header, Button } from 'semantic-ui-react';
 import styles from './styles.module.scss';
 
-function PageHeader({ titleKey = '' }) {
+function PageHeader({ titleKey = '', children }) {
   const { t } = useTranslation();
   return (
     <div className={styles.header}>
@@ -12,18 +12,14 @@ function PageHeader({ titleKey = '' }) {
         <Icon name='edit' size='small' />
         <Header.Content>{t(titleKey)}</Header.Content>
       </Header>
-
-      <Button.Group>
-        <Button disabled positive>Save All Changes</Button>
-        <Button.Or />
-        <Button disabled>Discard All Changes</Button>
-      </Button.Group>
+      {React.Children.only(children)}
     </div>
   );
 }
 
 PageHeader.propTypes = {
   titleKey: PropTypes.string.isRequired,
+  children: PropTypes.node,
 };
 
 export default PageHeader;

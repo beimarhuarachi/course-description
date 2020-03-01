@@ -4,6 +4,8 @@ import {
   GET_COURSE_FAILED,
   UPDATE_COURSE,
   UPDATE_TEXTBOOK,
+  DISCARD_ALL_CHANGES,
+  DISCARD_TEXTBOOK_CHANGES,
 } from './course.actions';
 
 const initialState = {
@@ -15,6 +17,17 @@ const initialState = {
   course: null,
   textbooks: [],
 };
+
+function resetTextbooksValues(textbooks) {
+  return textbooks.map((textbook) => {
+    return {
+      ...textbook,
+      currentValue: {
+        ...textbook.previousValue,
+      },
+    };
+  });
+}
 
 export function courseReducer(state = initialState, action) {
   switch (action.type) {
@@ -100,6 +113,39 @@ export function courseReducer(state = initialState, action) {
           currentValue: {
             ...item.currentValue,
             [key]: value,
+          },
+        };
+      });
+      return {
+        ...state,
+        textbooks: newTextbooks,
+      };
+    }
+
+    case DISCARD_ALL_CHANGES: {
+      const newTextbooks = resetTextbooksValues(state.textbooks);
+      return {
+        ...state,
+        course: {
+          ...state.course,
+          currentValue: {
+            ...state.course.previousValue,
+          },
+        },
+        textbooks: newTextbooks,
+      };
+    }
+
+    case DISCARD_TEXTBOOK_CHANGES: {
+      const { textbookId } = action.payload;
+      const newTextbooks = state.textbooks.map((textbook) => {
+        if (textbook.id !== textbookId) {
+          return textbook;
+        }
+        return {
+          ...textbook,
+          currentValue: {
+            ...textbook.previousValue,
           },
         };
       });

@@ -1,13 +1,18 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './i18n/i18n';
-import App from './App';
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
+import './i18n/i18n';
+import App from 'app/App';
 import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(
   <Suspense fallback={'Loading'}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Suspense>,
   document.getElementById('root'),
 );

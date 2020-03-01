@@ -5,6 +5,7 @@ export const GET_COURSE_FAILED = 'GET_COURSE_FAILED';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const UPDATE_TEXTBOOK = 'UPDATE_TEXTBOOK';
 export const DISCARD_ALL_CHANGES = 'DISCARD_ALL_CHANGES';
+export const DISCARD_TEXTBOOK_CHANGES = 'DISCARD_TEXTBOOK_CHANGES';
 
 export function getCourse(courseId = '') {
   return {
@@ -58,5 +59,14 @@ export function discardAllChanges() {
   return {
     type: DISCARD_ALL_CHANGES,
     payload: {},
+  };
+}
+
+export function discardTextbookChanges(textbookId = '') {
+  return {
+    type: DISCARD_TEXTBOOK_CHANGES,
+    payload: {
+      textbookId,
+    },
   };
 }

@@ -2,6 +2,19 @@
   "app-name": "Course Description",
   "common": {
     "page-not-found": "Page not found",
-    "edit-course": "Edit Course Description"
+    "edit-course": "Edit Course Description",
+    "textbooks": "TextBooks"
+  },
+  "textbook": {
+    "title": "Title",
+    "author": "Author"
+  },
+  "course": {
+    "name": "Name",
+    "description": "Description"
+  },
+  "action": {
+    "save": "Save",
+    "discard-changes": "Discard Changes"
   }
 }

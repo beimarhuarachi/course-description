@@ -9,7 +9,7 @@ import NotFound from 'app/core/components/NotFound';
 export function Empty() {
   return (
     <div>
-      remove this compoentn
+      empty home
     </div>
   )
 }

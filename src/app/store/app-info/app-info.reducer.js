@@ -1,4 +1,4 @@
-import { UPDATE_APP_INFO } from './actions';
+import { UPDATE_APP_INFO } from './app-info.actions';
 
 const initialState = { appName: 'Course Description' };
 

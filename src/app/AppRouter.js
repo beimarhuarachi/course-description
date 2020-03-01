@@ -11,7 +11,7 @@ export function Empty() {
     <div>
       empty home
     </div>
-  )
+  );
 }
 
 export default function AppRouter() {

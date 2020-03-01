@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 export default function NavBar() {
   const { t } = useTranslation();
   return (
-    <Menu stackable inverted>
+    <Menu inverted>
       <Container>
         <Menu.Item>
           <img src={logo} />

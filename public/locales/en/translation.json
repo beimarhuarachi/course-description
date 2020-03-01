@@ -1,6 +1,7 @@
 {
   "app-name": "Course Description",
   "common": {
-    "page-not-found": "Page not found"
+    "page-not-found": "Page not found",
+    "edit-course": "Edit Course Description"
   }
 }

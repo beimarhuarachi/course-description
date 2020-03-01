@@ -5,6 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import NotFound from 'app/core/components/NotFound';
+import Courses from './courses/Courses';
 
 export function Empty() {
   return (
@@ -19,7 +20,7 @@ export default function AppRouter() {
     <Switch>
       <Route exact path='/' render={() => <Redirect to='/home'/>} />
       <Route path='/home' component={Empty} />
-      <Route path='/courses/:id' component={Empty} />
+      <Route path='/courses/:id' component={Courses} />
       <Route component={NotFound} />
     </Switch>
   );

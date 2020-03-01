@@ -1,4 +1,16 @@
 import { of, throwError } from 'rxjs';
+// ajax operator has support for asynchronous request to server
+// ajax({
+//   url: 'https://httpbin.org/delay/2',
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'rxjs-custom-header': 'Rxjs'
+//   },
+//   body: {
+//     rxjs: 'Hello World!'
+//   }
+// })
 
 const mockCourse = {
   "id": "123",
@@ -20,6 +32,11 @@ const mockCourse = {
       "author": "Edward Bernays",
       "title": "Public Relations"
     },
+    {
+      "id": "4",
+      "author": "Eli Hinnegan",
+      "title": "Introduction to Location-Based Advertising"
+    },
   ]
 };
 
@@ -36,6 +53,7 @@ export function getCourseById(courseId = '') {
  * @param {Object} course 
  */
 export function updateCourse(courseId = '', course) {
+  console.log('sending: ', courseId, course);
   if (!course) {
     return throwError('No body specified');
   }

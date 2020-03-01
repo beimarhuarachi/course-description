@@ -2,10 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextBook from 'app/courses/components/TextBook';
-import { updateTextbook, discardTextbookChanges } from 'app/store/data/course/course.actions';
+import {
+  updateTextbook,
+  discardTextbookChanges,
+  saveTextbook,
+} from 'app/store/data/course/course.actions';
 import { areEqual } from 'app/core/utils/areEqual';
 
-export function TextBooksList({ textbooks, canShow, updateTextbook, discardTextbookChanges, updatingCourse }) {
+export function TextBooksList({
+  textbooks,
+  canShow,
+  updateTextbook,
+  discardTextbookChanges,
+  updatingCourse,
+  saveTextbook,
+}) {
   if (!canShow) {
     return null;
   }
@@ -15,7 +26,7 @@ export function TextBooksList({ textbooks, canShow, updateTextbook, discardTextb
         <TextBook
           key={id}
           handleChange={({ target }) => {updateTextbook(id, target.name, target.value)}}
-          handleSubmit={() => {}}
+          handleSubmit={() => {saveTextbook(id)}}
           handleReset={() => {discardTextbookChanges(id)}}
           values={currentValue}
           enableActions={!areEqual(previousValue, currentValue) && !updatingCourse}
@@ -39,6 +50,7 @@ TextBooksList.propTypes = {
   updateTextbook: PropTypes.func,
   discardTextbookChanges: PropTypes.func,
   updatingCourse: PropTypes.bool,
+  saveTextbook: PropTypes.func,
 };
 
 const mapStateToProps = ({ data }) => {
@@ -51,5 +63,5 @@ const mapStateToProps = ({ data }) => {
 
 export default connect(
   mapStateToProps,
-  { updateTextbook, discardTextbookChanges },
+  { updateTextbook, discardTextbookChanges, saveTextbook },
 )(TextBooksList);

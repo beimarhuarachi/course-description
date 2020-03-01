@@ -11,6 +11,10 @@ export const SAVE_ALL_CHANGES = 'SAVE_ALL_CHANGES';
 export const SAVE_ALL_CHANGES_SUCCESS = 'SAVE_ALL_CHANGES_SUCCESS';
 export const SAVE_ALL_CHANGES_FAILED = 'SAVE_ALL_CHANGES_FAILED';
 
+export const SAVE_TEXTBOOK = 'SAVE_TEXTBOOK';
+export const SAVE_TEXTBOOK_SUCCESS = 'SAVE_TEXTBOOK_SUCCESS';
+export const SAVE_TEXTBOOK_FAILED = 'SAVE_TEXTBOOK_FAILED';
+
 export function getCourse(courseId = '') {
   return {
     type: GET_COURSE,
@@ -92,6 +96,34 @@ export function saveAllChangesSuccess() {
 export function saveAllChangesFailed(error) {
   return {
     type: SAVE_ALL_CHANGES_FAILED,
+    payload: {
+      error,
+    },
+  };
+}
+
+export function saveTextbook(textbookId = '') {
+  return {
+    type: SAVE_TEXTBOOK,
+    payload: {
+      textbookId,
+    },
+  };
+}
+
+export function saveTextbookSuccess(textbookId = '', response) {
+  return {
+    type: SAVE_TEXTBOOK_SUCCESS,
+    payload: {
+      textbookId,
+      response,
+    },
+  };
+}
+
+export function saveTextbookFailed(error) {
+  return {
+    type: SAVE_TEXTBOOK_FAILED,
     payload: {
       error,
     },

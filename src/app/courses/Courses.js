@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCourse } from 'app/store/data/course/course.actions';
 import Header from 'app/core/components/PageHeader';
+import CourseDescription from './containers/CourseDescription';
+import TextbooksDivider from './components/TextbooksDivider';
+import TextBooksList from './containers/TextBooksList';
 
 export function Courses({ match, getCourse }) {
   useEffect(() => {
@@ -15,6 +18,9 @@ export function Courses({ match, getCourse }) {
   return (
     <>
       <Header titleKey='common.edit-course' />
+      <CourseDescription />
+      <TextbooksDivider />
+      <TextBooksList />
     </>
   );
 }
